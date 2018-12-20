@@ -5,19 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuControl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool IsInOptions = false;
+    public GameObject MainMenuUI;
+    public GameObject OptionsMenuUI;
+
+
+    public void LoadCareer()
     {
-        
+        SceneManager.LoadScene("SampleScene");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void LoadGame()
+    public void LoadSandbox()
     {
         SceneManager.LoadScene("SampleScene");
     }
@@ -25,5 +23,29 @@ public class MainMenuControl : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && IsInOptions)
+        {
+            OptionsMenuUI.SetActive(false);
+            MainMenuUI.SetActive(true);
+            IsInOptions = false;
+        }    
+    }
+
+    public void Options()
+    {
+        IsInOptions = true;
+        MainMenuUI.SetActive(false);
+        OptionsMenuUI.SetActive(true);
+    }
+
+    public void Back()
+    {
+        IsInOptions = false;
+        OptionsMenuUI.SetActive(false);
+        MainMenuUI.SetActive(true);
     }
 }
