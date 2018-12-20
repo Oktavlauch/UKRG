@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//lolVSMarkartTest
 abstract public class _Planet : MonoBehaviour
 {
     //PlanetVariables:
@@ -36,7 +35,6 @@ abstract public class _Planet : MonoBehaviour
     /// The Starting position of the planet at t(0)
     /// May be subject to change
     /// </summary>
-    /// lol
     Vector2 PositionNaught;
     void Start()
     {
