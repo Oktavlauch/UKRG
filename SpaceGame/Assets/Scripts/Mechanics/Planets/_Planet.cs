@@ -45,6 +45,12 @@ abstract public class _Planet : MonoBehaviour
     /// May be subject to change
     /// </summary>
     Vector2 PositionNaught;
+
+    /// <summary>
+    /// The current posiiton of the planet at t(t)
+    /// <!--May be subject to change; development assistance-->
+    /// </summary>
+    Vector2 CurrentPosition;
     
     void Start()
     {
@@ -55,5 +61,10 @@ abstract public class _Planet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public Vector2 GetPosition()
+    {
+        return CurrentPosition;
     }
 }
