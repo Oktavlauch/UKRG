@@ -36,6 +36,10 @@ abstract public class _Planet : MonoBehaviour
     /// May be subject to change
     /// </summary>
     Vector2 PositionNaught;
+    /// <summary>
+    /// r (in Meters) from Center of Mass to end of Sphere of Influence
+    /// </summary>
+    int DistanceSphereOfInfluence;
     void Start()
     {
         
