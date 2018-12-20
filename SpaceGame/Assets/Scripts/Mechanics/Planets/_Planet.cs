@@ -7,50 +7,50 @@ abstract public class _Planet : MonoBehaviour
     /// <summary>
     /// Mass of Planet in kg
     /// </summary>
-    int Mass;
+    public int Mass;
 
     /// <summary>
     /// Pressure of Planet on Surfacelevel
     /// Surfacelevel = rSurface
     /// </summary>
-    int StandardPressure;
+    public int StandardPressure;
 
     /// <summary>
     /// Rotation of Planet around itself
     /// </summary>
-    int RotationSpeed;
+    public int RotationSpeed;
 
     /// <summary>
     /// r (in Meters) from Centre of Mass to Surfacelevel
     /// </summary>
-    int DistanceSurface;
+    public int DistanceSurface;
 
     /// <summary>
     /// r (in Meters) between the center of Mass of the Planet to it's Center of Rotation (e.g. Sun)
     /// </summary>
-    int DistanceRotatingObject;
+    public int DistanceRotatingObject;
 
     /// <summary>
     /// The Speed at which a Planet is going (m/s)
     /// </summary>
-    int Speed;
+    public int Speed;
 
     /// <summary>
     /// r (in Meters) from Center of Mass to end of Sphere of Influence
     /// </summary>
-    int DistanceSphereOfInfluence;
+    public int DistanceSphereOfInfluence;
 
     /// <summary>
     /// The Starting position of the planet at t(0)
     /// May be subject to change
     /// </summary>
-    Vector2 PositionNaught;
+    public Vector2 PositionNaught;
 
     /// <summary>
     /// The current posiiton of the planet at t(t)
     /// <!--May be subject to change; development assistance-->
     /// </summary>
-    Vector2 CurrentPosition;
+    public Vector2 CurrentPosition;
     
     void Start()
     {

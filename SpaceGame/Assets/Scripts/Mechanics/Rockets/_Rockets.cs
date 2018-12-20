@@ -7,51 +7,51 @@ abstract public class _Rockets : MonoBehaviour
     /// <summary>
     /// Mass of the Rocket(stage) in kg
     /// </summary>
-    int Mass;
+    public int Mass;
 
     /// <summary>
     /// The current Speed of the rocket in x,y coordinates
     /// [v]=m/s
     /// </summary>
-    Vector2 Velocity;
+    public Vector2 Velocity;
 
     /// <summary>
     /// The Rockets current Orientation(0-k*2PI)
     /// [orientation]=rad
     /// Orientation Counterclockwise! ; origin(1,0)
     /// </summary>
-    int Orientation;
+    public int Orientation;
 
     /// <summary>
     /// The rate at which the orientation changes (angular velocity)
     /// [omega]=rad/s
     /// </summary>
-    float AngularVelocity;
+    public float AngularVelocity;
 
     /// <summary>
     /// The rate at which the Angular Velocity changes (angular accelaration)
     /// [AngularAccelaration]=rad*s^-2
     /// </summary>
-    float AngularAcceleration;
+    public float AngularAcceleration;
 
     /// <summary>
     /// The force with which the rocket propels itself (2-Dimensional)
     /// [F]=m*a
     /// => a = Force/Mass
     /// </summary>
-    Vector2 Force;
+    public Vector2 Force;
 
     /// <summary>
     /// Current Temperature of the Rocket
     /// [T]=°C
     /// </summary>
-    int Temperature;
+    public int Temperature;
 
     /// <summary>
     /// Critical Temperature at which the rocket will have some serious problems
     /// [T]=°C
     /// </summary>
-    int MaxTemperature;
+    public int MaxTemperature;
 
 
     // Start is called before the first frame update

@@ -23,6 +23,8 @@ public class TestRocketGravity : MonoBehaviour
     Vector2 StartVelocity=new Vector2(0,1);
 
     private Rigidbody2D rb;
+    private bool KeyPressed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,15 @@ public class TestRocketGravity : MonoBehaviour
     /// </summary>
     void Update()
     {
+        KeyPressed = false;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            KeyPressed = true;
+        }
+        else
+        {
+            KeyPressed = false;
+        }
         ForceDirection = new Vector2(ObjectPos.x - transform.position.x, ObjectPos.y - transform.position.y);//direction from which to go towards center of oscillation
         ForceValue = (float) (1 / Math.Pow(ForceDirection.magnitude,2));//The how strong the force is (Q Mm / r^2) simplified
         rb.AddRelativeForce(ForceDirection.normalized * ForceValue);
