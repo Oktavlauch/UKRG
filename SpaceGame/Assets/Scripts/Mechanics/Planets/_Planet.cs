@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//lolVSMarkartTest
 abstract public class _Planet : MonoBehaviour
 {
     //PlanetVariables:
