@@ -64,12 +64,20 @@ abstract public class _Planet : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Updates Position of Planet
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Position of Planet as Vector2</returns>
     public Vector2 GetPosition()
     {
         CurrentPosition = new Vector2(transform.position.x,transform.position.y);
         return CurrentPosition;
+    }
+    /// <summary>
+    /// Mass of a Planet
+    /// </summary>
+    /// <returns>Mass of Planet in kg</returns>
+    public int GetMass()
+    {
+        return Mass;
     }
 }
