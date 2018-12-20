@@ -51,7 +51,7 @@ public class TestRocketGravity : MonoBehaviour
             KeyPressed = false;
         }
         ForceDirection = new Vector2(ObjectPos.x - transform.position.x, ObjectPos.y - transform.position.y); //direction from which to go towards center of oscillation
-        ForceValue = (float) (1 / Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (Q Mm / r^2) simplified
+        ForceValue = (float) (1 / Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
         rb.AddRelativeForce(ForceDirection.normalized * ForceValue);
     }
 }
