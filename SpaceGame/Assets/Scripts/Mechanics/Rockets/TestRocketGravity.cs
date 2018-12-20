@@ -40,7 +40,7 @@ public class TestRocketGravity : MonoBehaviour
     /// </summary>
     void Update()
     {
-        ObjectPos = testPlanet.GetPosition;
+        ObjectPos = testPlanet.GetPositionZ;
         KeyPressed = false;
         if (Input.GetKeyDown(KeyCode.W))
         {
