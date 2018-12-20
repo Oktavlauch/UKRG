@@ -16,6 +16,11 @@ abstract public class _Rockets : MonoBehaviour
     public Vector2 Velocity;
 
     /// <summary>
+    /// The starting Velocity (can be 0,0) of the rocket
+    /// </summary>
+    public Vector2 StartingVelocity;
+
+    /// <summary>
     /// The Rockets current Orientation(0-k*2PI)
     /// [orientation]=rad
     /// Orientation Counterclockwise! ; origin(1,0)
@@ -53,6 +58,16 @@ abstract public class _Rockets : MonoBehaviour
     /// </summary>
     public int MaxTemperature;
 
+    /// <summary>
+    /// The thrusting Power of a rocket
+    /// [F]=N
+    /// </summary>
+    public int Thrust;
+
+    /// <summary>
+    /// The Torque defines how fast the rocket can turn
+    /// </summary>
+    public float Torque;
 
     // Start is called before the first frame update
     void Start()

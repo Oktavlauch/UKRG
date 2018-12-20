@@ -164,7 +164,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 66.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -174,7 +174,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 0
   m_HDR: 1
-  m_AllowMSAA: 0
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 0
@@ -270,8 +270,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732150184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.24, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: -61.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -288,6 +288,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9b3bca89b363141a3835fa475fc9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mass: 100
+  Velocity: {x: 0, y: 0}
+  StartingVelocity: {x: 0, y: 10}
+  Orientation: 0
+  AngularVelocity: 0
+  AngularAcceleration: 0
+  Force: {x: 0, y: 0}
+  Temperature: 0
+  MaxTemperature: 0
+  Thrust: 50
+  Torque: 100
   testPlanet: {fileID: 949932550}
 --- !u!50 &732150188
 Rigidbody2D:
@@ -508,7 +519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &885590620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -684,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10570a7f61150442a329a6e471afe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mass: 20
+  Mass: 100
   StandardPressure: 5
   RotationSpeed: 0
   DistanceSurface: 0
@@ -749,8 +760,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949932549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.53, y: 0.18, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: 3.6, y: -0.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class TestRocketGravity : MonoBehaviour
+public class TestRocketGravity : _Rockets
 {
     public TestPlanet testPlanet;
     /// <summary>
@@ -22,7 +22,6 @@ public class TestRocketGravity : MonoBehaviour
     /// <summary>
     /// Velocity of the rocket at the beginning
     /// </summary>
-    Vector2 StartVelocity = new Vector2(0,1);
 
     private Rigidbody2D rb;
     private bool KeyPressed;
@@ -31,7 +30,7 @@ public class TestRocketGravity : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = StartVelocity;
+        rb.velocity = StartingVelocity;
     }
 
     // Update is called once per frame
@@ -44,14 +43,19 @@ public class TestRocketGravity : MonoBehaviour
         KeyPressed = false;
         if (Input.GetKeyDown(KeyCode.W))
         {
-            KeyPressed = true;
+            rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
         }
-        else
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            KeyPressed = false;
+            rb.AddTorque(Torque);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            rb.AddTorque(-Torque);
         }
         ForceDirection = new Vector2(ObjectPos.x - transform.position.x, ObjectPos.y - transform.position.y); //direction from which to go towards center of oscillation
-        ForceValue = (float) (testPlanet.GetMass() / Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
-        rb.AddRelativeForce(ForceDirection.normalized * ForceValue);
+        ForceValue = (float) ((testPlanet.GetMass()* Mass)/ Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
+        rb.AddForce(ForceDirection.normalized * ForceValue);
     }
 }
+//G=0.0000000000667408
