@@ -14,11 +14,11 @@ public class TestRocketGravity : MonoBehaviour
     Vector2 ForceDirection;
     Vector2 ObjectPos = new Vector2(1.0f, 0.0f);
 
-    public Rigidbody rb;
+    public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
