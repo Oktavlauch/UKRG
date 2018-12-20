@@ -65,6 +65,7 @@ abstract public class _Planet : MonoBehaviour
 
     public Vector2 GetPosition()
     {
+        CurrentPosition = transform.position;
         return CurrentPosition;
     }
 }

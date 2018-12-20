@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public TestPlanet testPlanet;
+
 
 public class TestRocketGravity : MonoBehaviour
 {
+    public TestPlanet testPlanet;
     /// <summary>
     /// magnitude of the force
     /// </summary>
@@ -39,7 +40,7 @@ public class TestRocketGravity : MonoBehaviour
     /// </summary>
     void Update()
     {
-        ObjectPos = testPlanet.GetPos;
+        ObjectPos = testPlanet.GetPosition;
         KeyPressed = false;
         if (Input.GetKeyDown(KeyCode.W))
         {
