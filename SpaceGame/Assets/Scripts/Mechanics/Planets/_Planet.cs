@@ -60,7 +60,7 @@ abstract public class _Planet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CurrentPosition = transform.position;
     }
 
     public Vector2 GetPosition()

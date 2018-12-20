@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public TestPlanet testPlanet;
 
 public class TestRocketGravity : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class TestRocketGravity : MonoBehaviour
     /// <summary>
     /// Position of the "planet" or point around which to rotate
     /// </summary>
-    Vector2 ObjectPos = new Vector2(1.0f, 0.0f);
+    Vector2 ObjectPos;
     /// <summary>
     /// Velocity of the rocket at the beginning
     /// </summary>
@@ -38,6 +39,7 @@ public class TestRocketGravity : MonoBehaviour
     /// </summary>
     void Update()
     {
+        ObjectPos = testPlanet.GetPos;
         KeyPressed = false;
         if (Input.GetKeyDown(KeyCode.W))
         {
