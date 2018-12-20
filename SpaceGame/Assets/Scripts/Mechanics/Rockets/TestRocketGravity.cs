@@ -10,7 +10,7 @@ public class TestRocketGravity : MonoBehaviour
     /// <summary>
     /// magnitude of the force
     /// </summary>
-    float ForceValue=1;
+    float ForceValue = 1;
     /// <summary>
     /// direction of the force
     /// </summary>
@@ -22,7 +22,7 @@ public class TestRocketGravity : MonoBehaviour
     /// <summary>
     /// Velocity of the rocket at the beginning
     /// </summary>
-    Vector2 StartVelocity=new Vector2(0,1);
+    Vector2 StartVelocity = new Vector2(0,1);
 
     private Rigidbody2D rb;
     private bool KeyPressed;
