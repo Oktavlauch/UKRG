@@ -122,9 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 731240325}
   - component: {fileID: 731240324}
+  - component: {fileID: 731240327}
   - component: {fileID: 731240323}
   - component: {fileID: 731240326}
-  - component: {fileID: 731240327}
   m_Layer: 0
   m_Name: NexusII
   m_TagString: Untagged
@@ -246,7 +246,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731240322}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

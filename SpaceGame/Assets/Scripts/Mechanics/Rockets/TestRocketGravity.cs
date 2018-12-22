@@ -42,15 +42,15 @@ public class TestRocketGravity : _Rockets
     {
         ObjectPos = testPlanet.GetPosition();
         KeyPressed = false;
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             rb.AddTorque(Torque);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKey(KeyCode.D))
         {
             rb.AddTorque(-Torque);
         }
