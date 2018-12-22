@@ -85,14 +85,7 @@ abstract public class _Planet : MonoBehaviour
     /// Rigidbody for Planet;
     /// </summary>
     public Rigidbody2D rb;
-    private void Awake()
-    {
-        
-        rb.IsAwake();
-        rb.gravityScale = 0;
-        rb.angularVelocity = 1;
-        //rb.freezeRotation();
-    }
+    
     //public void Rotate()
     //{
     //    rb.GetComponent<Rigidbody2D>();

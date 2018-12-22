@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 731240325}
   - component: {fileID: 731240324}
   - component: {fileID: 731240327}
+  - component: {fileID: 731240328}
   - component: {fileID: 731240323}
   - component: {fileID: 731240326}
   m_Layer: 0
@@ -153,7 +154,7 @@ MonoBehaviour:
   Force: {x: 0, y: 0}
   Temperature: 0
   MaxTemperature: 0
-  Thrust: 50
+  Thrust: 250
   Torque: 25
   testPlanet: {fileID: 1946502603}
 --- !u!212 &731240324
@@ -252,9 +253,33 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.016217709}
-  m_Size: {x: 0.52, y: 5.7024355}
+  m_Offset: {x: 0, y: 0.12398338}
+  m_Size: {x: 0.52, y: 5.4220333}
   m_Direction: 0
+--- !u!68 &731240328
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731240322}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.320076, y: -1.4188892}
+  - {x: -1.1320724, y: -1.766705}
+  - {x: -1.1137962, y: -2.7047946}
+  - {x: -0.30059052, y: -2.3449116}
+  - {x: 0.27864838, y: -2.3621752}
+  - {x: 1.1080208, y: -2.7204585}
+  - {x: 1.1238098, y: -1.7532628}
+  - {x: 0.3056755, y: -1.4273034}
 --- !u!1 &1337454356
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +532,7 @@ GameObject:
   - component: {fileID: 1946502604}
   - component: {fileID: 1946502603}
   - component: {fileID: 1946502602}
+  - component: {fileID: 1946502606}
   m_Layer: 0
   m_Name: protoplanet
   m_TagString: Untagged
@@ -544,13 +570,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mass: 10000
   StandardPressure: 0
-  RotationSpeed: 0
+  RotationSpeed: 1
   DistanceSurface: 0
   DistanceRotatingObject: 0
   Speed: 0
   DistanceSphereOfInfluence: 0
   PositionNaught: {x: 0, y: 0}
   CurrentPosition: {x: 0, y: 0}
+  rb: {fileID: 1946502606}
 --- !u!212 &1946502604
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -613,3 +640,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1946502606
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946502601}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 3

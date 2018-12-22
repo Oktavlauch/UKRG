@@ -24,7 +24,7 @@ public class TestRocketGravity : _Rockets
     /// </summary>
 
     private Rigidbody2D rb;
-    private bool KeyPressed;
+    //private bool KeyPressed;
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class TestRocketGravity : _Rockets
     void Update()
     {
         ObjectPos = testPlanet.GetPosition();
-        KeyPressed = false;
+        //KeyPressed = false;
         if (Input.GetKey(KeyCode.W))
         {
             rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
