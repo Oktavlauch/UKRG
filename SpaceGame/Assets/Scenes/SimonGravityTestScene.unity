@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mass: 50
-  Velocity: {x: 0, y: 100}
+  Velocity: {x: 0, y: 0}
   StartingVelocity: {x: 0, y: 10}
   Orientation: 0
   AngularVelocity: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   Force: {x: 0, y: 0}
   Temperature: 0
   MaxTemperature: 0
-  Thrust: 25
+  Thrust: 50
   Torque: 25
   testPlanet: {fileID: 1946502603}
 --- !u!212 &731240324
@@ -252,8 +252,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.52, y: 5.67}
+  m_Offset: {x: 0, y: -0.016217709}
+  m_Size: {x: 0.52, y: 5.7024355}
   m_Direction: 0
 --- !u!1 &1468553704
 GameObject:
