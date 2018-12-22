@@ -82,6 +82,39 @@ abstract public class _Planet : MonoBehaviour
     }
 
     /// <summary>
+    /// Pressure of Planet on Surfacelevel
+    /// </summary>
+    /// <returns>Returns Pressure in Pascal</returns>
+    public int GetPressure()
+    {
+        return StandardPressure;
+    }
+
+    /// <summary>
+    /// The Surfacelevel is the distance from the center of the planet to its surface
+    /// </summary>
+    /// <returns>Returns the distance r (radius) from the center of the planet to its surface in [r]=m</returns>
+    public int GetSurfaceLevel()
+    {
+        return DistanceSurface;
+    }
+
+
+    /// <summary>
+    /// IsInRange checks if a certain Point (Coordinate) is within the sphere of influence of a Planet.
+    /// </summary>
+    /// <param name="Pos">Pos is the position of the Point (World Coordinates) to be checked</param>
+    /// <returns>Returns true if the point is within the sphere of influence</returns>
+    public bool IsInRange(Vector2 Pos)
+    {
+        bool InRange = false;
+        if(Vector2.Distance(Pos, GetPosition()) <= DistanceSphereOfInfluence){
+            InRange = true;
+        }
+        return InRange;
+    }
+
+    /// <summary>
     /// Rigidbody for Planet;
     /// </summary>
     public Rigidbody2D rb;

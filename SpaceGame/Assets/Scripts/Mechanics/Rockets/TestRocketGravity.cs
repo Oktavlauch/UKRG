@@ -7,14 +7,7 @@ using UnityEngine;
 public class TestRocketGravity : _Rockets
 {
     public TestPlanet testPlanet;
-    /// <summary>
-    /// magnitude of the force
-    /// </summary>
-    float ForceValue = 1;
-    /// <summary>
-    /// direction of the force
-    /// </summary>
-    Vector2 ForceDirection;
+    
     /// <summary>
     /// Position of the "planet" or point around which to rotate
     /// </summary>
@@ -40,23 +33,25 @@ public class TestRocketGravity : _Rockets
     /// </summary>
     void Update()
     {
-        ObjectPos = testPlanet.GetPosition();
-        //KeyPressed = false;
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddTorque(Torque);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddTorque(-Torque);
-        }
-        ForceDirection = new Vector2(ObjectPos.x - transform.position.x, ObjectPos.y - transform.position.y); //direction from which to go towards center of oscillation
-        ForceValue = (float) ((testPlanet.GetMass()* Mass)/ Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
-        rb.AddForce(ForceDirection.normalized * ForceValue);
+        //ObjectPos = testPlanet.GetPosition();
+        ////KeyPressed = false;
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
+        //}
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    rb.AddTorque(Torque);
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    rb.AddTorque(-Torque);
+        //}
+        //ForceDirection = new Vector2(ObjectPos.x - transform.position.x, ObjectPos.y - transform.position.y); //direction from which to go towards center of oscillation
+        //ForceValue = (float) ((testPlanet.GetMass()* Mass)/ Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
+        //rb.AddForce(ForceDirection.normalized * ForceValue);
+
+        ApplyForce(rb, testPlanet);
     }
 }
 //G=0.0000000000667408

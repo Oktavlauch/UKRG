@@ -290,6 +290,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1337454358}
   - component: {fileID: 1337454357}
+  - component: {fileID: 1337454362}
+  - component: {fileID: 1337454361}
+  - component: {fileID: 1337454360}
+  - component: {fileID: 1337454359}
   m_Layer: 0
   m_Name: GryffinFirstStage
   m_TagString: Untagged
@@ -359,6 +363,105 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1337454359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337454356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9b3bca89b363141a3835fa475fc9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mass: 10
+  Velocity: {x: 0, y: 0}
+  StartingVelocity: {x: 0, y: 0.21}
+  Orientation: 0
+  AngularVelocity: 0
+  AngularAcceleration: 0
+  Force: {x: 0, y: 0}
+  Temperature: 0
+  MaxTemperature: 0
+  Thrust: 300
+  Torque: 0
+  testPlanet: {fileID: 1946502603}
+--- !u!50 &1337454360
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337454356}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!68 &1337454361
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337454356}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.6339035, y: -3.6414156}
+  - {x: 0.20878601, y: -4.0170345}
+  - {x: 0.20785141, y: -4.331641}
+  - {x: 0.08736038, y: -4.4968977}
+  - {x: 0.21739578, y: -4.7315307}
+  - {x: 0.24901581, y: -5.1233525}
+  - {x: -0.2526436, y: -5.1244383}
+  - {x: -0.2243042, y: -4.727004}
+  - {x: -0.08172989, y: -4.4941883}
+  - {x: -0.21657562, y: -4.328335}
+  - {x: -0.21513367, y: -4.0064116}
+  - {x: -0.6263466, y: -3.6325989}
+--- !u!61 &1337454362
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337454356}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.76662207}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.25, y: 10.25}
+    newSize: {x: 1.25, y: 10.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 8.716756}
+  m_EdgeRadius: 0
 --- !u!1 &1468553704
 GameObject:
   m_ObjectHideFlags: 0
