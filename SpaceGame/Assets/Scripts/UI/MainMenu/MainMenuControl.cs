@@ -22,7 +22,7 @@ public class MainMenuControl : MonoBehaviour
     public void LoadSandbox()
     {
         //SceneManager.LoadScene("SampleScene");
-        Debug.Log("Sorry, we don't support Sandbox yet");
+        Debug.Log("Sorry, we don't support Sandbox yet!");
     }
 
     public void QuitGame()
