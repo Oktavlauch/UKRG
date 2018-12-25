@@ -14,12 +14,15 @@ public class MainMenuControl : MonoBehaviour
 
     public void CareerSelection()
     {
-
+        IsInCareer = true;
+        MainMenuUI.SetActive(false);
+        CareerSelectionUI.SetActive(true);
     }
 
     public void LoadSandbox()
     {
-        SceneManager.LoadScene("SampleScene");
+        //SceneManager.LoadScene("SampleScene");
+        Debug.Log("Sorry, we don't support Sandbox yet");
     }
 
     public void QuitGame()
@@ -31,9 +34,9 @@ public class MainMenuControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && IsInOptions)
         {
+            IsInOptions = false;
             OptionsMenuUI.SetActive(false);
             MainMenuUI.SetActive(true);
-            IsInOptions = false;
         }      
 
         if (Input.GetKeyDown(KeyCode.Escape) && IsInCareer)
@@ -53,8 +56,19 @@ public class MainMenuControl : MonoBehaviour
 
     public void Back()
     {
-        IsInOptions = false;
-        OptionsMenuUI.SetActive(false);
-        MainMenuUI.SetActive(true);
+        if (IsInOptions)
+        {
+            IsInOptions = false;
+            OptionsMenuUI.SetActive(false);
+            MainMenuUI.SetActive(true);
+        }
+
+        else if (IsInCareer)
+        {
+            IsInCareer = false;
+            MainMenuUI.SetActive(true);
+            CareerSelectionUI.SetActive(false);
+        }
+        
     }
 }
