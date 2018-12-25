@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 public class MainMenuControl : MonoBehaviour
 {
     public bool IsInOptions = false;
+    public bool IsInCareer = false;
     public GameObject MainMenuUI;
     public GameObject OptionsMenuUI;
+    public GameObject CareerSelectionUI;
 
 
-    public void LoadCareer()
+    public void CareerSelection()
     {
-        SceneManager.LoadScene("SampleScene");
+
     }
 
     public void LoadSandbox()
@@ -32,7 +34,14 @@ public class MainMenuControl : MonoBehaviour
             OptionsMenuUI.SetActive(false);
             MainMenuUI.SetActive(true);
             IsInOptions = false;
-        }    
+        }      
+
+        if (Input.GetKeyDown(KeyCode.Escape) && IsInCareer)
+        {
+            IsInCareer = false;
+            MainMenuUI.SetActive(true);
+            CareerSelectionUI.SetActive(false);
+        }  
     }
 
     public void Options()
