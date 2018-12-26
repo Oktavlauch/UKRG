@@ -156,6 +156,8 @@ MonoBehaviour:
   MaxTemperature: 0
   Thrust: 250
   Torque: 25
+  ForceValue: 1
+  ForceDirection: {x: 0, y: 0}
   testPlanet: {fileID: 1946502603}
 --- !u!212 &731240324
 SpriteRenderer:
@@ -386,6 +388,8 @@ MonoBehaviour:
   MaxTemperature: 0
   Thrust: 300
   Torque: 0
+  ForceValue: 1
+  ForceDirection: {x: 0, y: 0}
   testPlanet: {fileID: 1946502603}
 --- !u!50 &1337454360
 Rigidbody2D:
@@ -498,7 +502,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
