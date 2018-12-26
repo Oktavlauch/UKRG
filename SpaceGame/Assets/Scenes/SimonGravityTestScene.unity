@@ -638,8 +638,8 @@ GameObject:
   - component: {fileID: 1946502605}
   - component: {fileID: 1946502604}
   - component: {fileID: 1946502603}
-  - component: {fileID: 1946502602}
   - component: {fileID: 1946502606}
+  - component: {fileID: 1946502602}
   m_Layer: 0
   m_Name: protoplanet
   m_TagString: Untagged
@@ -660,9 +660,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.059181213, y: 0}
   serializedVersion: 2
-  m_Radius: 33.07
+  m_Radius: 5.1756554
 --- !u!114 &1946502603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +722,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e8d6577b93cc16d4989f19032c787126, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 77ea995535486b14fb6d71b30d391438, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -741,7 +741,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946502601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.7, y: -0.3, z: 0}
+  m_LocalPosition: {x: 30.95, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
