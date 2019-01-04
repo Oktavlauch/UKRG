@@ -28,6 +28,39 @@ public class CameraMovement : MonoBehaviour
         offset = transform.position - target.transform.position;
     }
 
+    //Update is called once per frame
+    void Update()
+    {
+        //Enables to zoom with the mousewheel
+       if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize >= 10)
+        {
+            Camera.main.orthographicSize = Camera.main.orthographicSize - 5;
+        }
+
+       //enables finer tuning
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize <= 10)
+        {
+            Camera.main.orthographicSize = Camera.main.orthographicSize -1;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.orthographicSize >= 10)
+        {
+            Camera.main.orthographicSize = Camera.main.orthographicSize + 5;
+        }
+
+        //enables finer tuning
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.orthographicSize <= 10)
+        {
+            Camera.main.orthographicSize = Camera.main.orthographicSize + 1;
+        }
+
+        //makes sure Camera doesnt get inverted when <= 0
+        if (Camera.main.orthographicSize <= 1)
+        {
+            Camera.main.orthographicSize = 1;
+        }
+    }
+
     // Update is called once per frame after Update was called
     void LateUpdate()
     {
