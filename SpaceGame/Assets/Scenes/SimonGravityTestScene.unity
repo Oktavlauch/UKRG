@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mass: 10000
-  StandardPressure: 1
+  StandardPressure: 100
   StandardDensity: 1
   RotationSpeed: 1
   DistanceSurface: 77

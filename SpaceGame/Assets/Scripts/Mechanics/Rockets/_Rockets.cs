@@ -125,7 +125,9 @@ abstract public class _Rockets : MonoBehaviour
     {
         //F = c_w * A * 1 / 2 ρ* v^2
         float ForceMagnitude =(float) (DragCoefficient * CrossSectionArea / 2 * density * rb.velocity.sqrMagnitude);
-        float WindForceMagnitude = (float)(DragCoefficient * CrossSectionArea / 2 * density * WindSpeedDirection.sqrMagnitude);
+        float WindSpeedDirectionDiff =(float)( rb.velocity.magnitude*Math.Cos(Vector2.Angle(WindSpeedDirection, rb.velocity))); //Difference between Rocket velocity and wind speed
+        float WindForceMagnitude = (float)(DragCoefficient * CrossSectionArea / 2 * density * Math.Pow(WindSpeedDirectionDiff,2));
+
 
         //       negative velocity direction *      Drag      +     Direction of Wind         * Speed of wind
         rb.AddForce( -rb.velocity.normalized * ForceMagnitude + WindSpeedDirection.normalized * WindForceMagnitude);
