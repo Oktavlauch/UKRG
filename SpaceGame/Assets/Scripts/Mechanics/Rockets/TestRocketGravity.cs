@@ -33,6 +33,7 @@ public class TestRocketGravity : _Rockets
     /// </summary>
     void Update()
     {
+        //Moved to SuperClass;
         //ObjectPos = testPlanet.GetPosition();
         ////KeyPressed = false;
         //if (Input.GetKey(KeyCode.W))
@@ -52,6 +53,8 @@ public class TestRocketGravity : _Rockets
         //rb.AddForce(ForceDirection.normalized * ForceValue);
 
         ApplyForce(rb, testPlanet);
+        ApplyDrag(rb, testPlanet.GetDensity(rb.position), testPlanet.AirSpeedDirection(rb.position));
+
     }
 }
 //G=0.0000000000667408

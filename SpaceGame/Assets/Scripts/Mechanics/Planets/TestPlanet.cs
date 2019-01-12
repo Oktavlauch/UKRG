@@ -13,6 +13,7 @@ public class TestPlanet : _Planet
         rb.IsAwake();
         rb.gravityScale = 0;
         rb.angularDrag = 0;
+        rb.mass = GetMass();
         //rb.freezeRotation();
         //Rotate();
     }

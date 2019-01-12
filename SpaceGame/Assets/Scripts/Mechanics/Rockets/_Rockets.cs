@@ -72,16 +72,29 @@ abstract public class _Rockets : MonoBehaviour
     //----------------------------------------------------------
     // Forcefields etc.
     //----------------------------------------------------------
-    /// <summary>
-    /// magnitude of the force
-    /// </summary>
-    public float ForceValue = 1;
-    /// <summary>
-    /// direction of the force
-    /// </summary>
-    public Vector2 ForceDirection;
+    ///// <summary>
+    ///// magnitude of the force
+    ///// </summary>
+    //public float ForceValue = 0;
+    
 
+    /// <summary>
+    /// Airresistance in Netons
+    /// F=c_w * A * 1/2 ρ * v^2
+    /// </summary>
+    public int Drag = 0;
 
+    /// <summary>
+    /// Drag Coefficient c_w for airresistance calculatiosn
+    /// F=c_w * A * 1/2 ρ * v^2
+    /// </summary>
+    public int DragCoefficient = 1;
+
+    /// <summary>
+    /// CrossSectionArea A stores the Cross Section Area /Querschnittsflläche/ of the rocket
+    /// [A] = m^2
+    /// </summary>
+    public float CrossSectionArea = 1;
 
     /// <summary>
     /// Applies gravitational Force to an object.
@@ -90,7 +103,7 @@ abstract public class _Rockets : MonoBehaviour
     /// <param name="ObjectPos">The Planet with which the "Rigidbody" will interact.</param>
     public void ApplyForce(Rigidbody2D rb, _Planet planet)
     {
-        Vector2 planetPosition = planet.GetPosition();
+    Vector2 planetPosition = planet.GetPosition();
         if (Input.GetKey(KeyCode.W))
         {
             rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
@@ -103,12 +116,20 @@ abstract public class _Rockets : MonoBehaviour
         {
             rb.AddTorque(-Torque);
         }
-        ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
-        ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); //The how strong the force is (G Mm / r^2) simplified
+        Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
+        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no "G")
         rb.AddForce(ForceDirection.normalized * ForceValue);
     }
 
+    public void ApplyDrag(Rigidbody2D rb, float density, Vector2 WindSpeedDirection)
+    {
+        //F = c_w * A * 1 / 2 ρ* v^2
+        float ForceMagnitude =(float) (DragCoefficient * CrossSectionArea / 2 * density * rb.velocity.sqrMagnitude);
+        float WindForceMagnitude = (float)(DragCoefficient * CrossSectionArea / 2 * density * WindSpeedDirection.sqrMagnitude);
 
+        //       negative velocity direction *      Drag      +     Direction of Wind         * Speed of wind
+        rb.AddForce( -rb.velocity.normalized * ForceMagnitude + WindSpeedDirection.normalized * WindForceMagnitude);
+    }
 
 
 

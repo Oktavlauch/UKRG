@@ -156,8 +156,9 @@ MonoBehaviour:
   MaxTemperature: 0
   Thrust: 250
   Torque: 25
-  ForceValue: 1
-  ForceDirection: {x: 0, y: 0}
+  Drag: 0
+  DragCoefficient: 1
+  CrossSectionArea: 1
   testPlanet: {fileID: 1946502603}
 --- !u!212 &731240324
 SpriteRenderer:
@@ -372,7 +373,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337454356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de9b3bca89b363141a3835fa475fc9c1, type: 3}
   m_Name: 
@@ -388,8 +389,9 @@ MonoBehaviour:
   MaxTemperature: 0
   Thrust: 300
   Torque: 0
-  ForceValue: 1
-  ForceDirection: {x: 0, y: 0}
+  Drag: 0
+  DragCoefficient: 1
+  CrossSectionArea: 1
   testPlanet: {fileID: 1946502603}
 --- !u!50 &1337454360
 Rigidbody2D:
@@ -674,7 +676,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.041170757, y: 0.007388306}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 5.146864
 --- !u!114 &1946502603
@@ -690,14 +692,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mass: 10000
-  StandardPressure: 0
+  StandardPressure: 1
+  StandardDensity: 1
   RotationSpeed: 1
-  DistanceSurface: 0
+  DistanceSurface: 77
   DistanceRotatingObject: 0
   Speed: 0
   DistanceSphereOfInfluence: 0
   PositionNaught: {x: 0, y: 0}
   CurrentPosition: {x: 0, y: 0}
+  SurfaceGravity: 9.81
   rb: {fileID: 1946502606}
 --- !u!212 &1946502604
 SpriteRenderer:
