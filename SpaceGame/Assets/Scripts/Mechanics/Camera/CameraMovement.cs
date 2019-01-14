@@ -37,7 +37,12 @@ public class CameraMovement : MonoBehaviour
             Camera.main.orthographicSize = Camera.main.orthographicSize - 5;
         }
 
-       //enables finer tuning
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize >= 100)
+        {
+            Camera.main.orthographicSize = Camera.main.orthographicSize - 50;
+        }
+
+        //enables finer tuning
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize <= 10)
         {
             Camera.main.orthographicSize = Camera.main.orthographicSize -1;
@@ -46,6 +51,11 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.orthographicSize >= 10)
         {
             Camera.main.orthographicSize = Camera.main.orthographicSize + 5;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.orthographicSize >= 100)
+        {
+            Camera.main.orthographicSize = Camera.main.orthographicSize + 50;
         }
 
         //enables finer tuning
