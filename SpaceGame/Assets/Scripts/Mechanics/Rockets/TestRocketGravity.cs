@@ -54,6 +54,7 @@ public class TestRocketGravity : _Rockets
 
         ApplyForce(rb, testPlanet);
         ApplyDrag(rb, testPlanet.GetDensity(rb.position), testPlanet.AirSpeedDirection(rb.position));
+        //rb.velocity = (testPlanet.AirSpeedDirection(rb.position));
 
     }
 }

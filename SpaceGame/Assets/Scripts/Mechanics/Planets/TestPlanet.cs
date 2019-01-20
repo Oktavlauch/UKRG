@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class TestPlanet : _Planet
     // Update is called once per frame
     void Update()
     {
-        rb.angularVelocity = RotationSpeed;
+        rb.angularVelocity = (float) (RotationSpeed/Math.PI*360);
     }
 
 }

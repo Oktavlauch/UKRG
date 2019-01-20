@@ -694,7 +694,7 @@ MonoBehaviour:
   Mass: 5972000
   StandardPressure: 100
   StandardDensity: 1
-  RotationSpeed: 1
+  RotationSpeed: 0.1
   DistanceSurface: 2110
   DistanceRotatingObject: 0
   Speed: 0
