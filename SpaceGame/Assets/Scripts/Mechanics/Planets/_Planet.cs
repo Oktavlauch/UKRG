@@ -8,7 +8,7 @@ abstract public class _Planet : MonoBehaviour
     /// <summary>
     /// Mass of Planet in kg
     /// </summary>
-    public int Mass;
+    public long Mass;
 
     /// <summary>
     /// Pressure of Planet on Surfacelevel
@@ -90,7 +90,7 @@ abstract public class _Planet : MonoBehaviour
     /// Mass of a Planet
     /// </summary>
     /// <returns>Mass of Planet in kg</returns>
-    public int GetMass()
+    public long GetMass()
     {
         return Mass;
     }

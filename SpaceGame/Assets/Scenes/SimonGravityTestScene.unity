@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mass: 50
   Velocity: {x: 0, y: 0}
-  StartingVelocity: {x: 0, y: 10}
+  StartingVelocity: {x: 0, y: 0}
   Orientation: 0
   AngularVelocity: 0
   AngularAcceleration: 0
@@ -691,11 +691,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10570a7f61150442a329a6e471afe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mass: 10000
+  Mass: 5972000
   StandardPressure: 100
   StandardDensity: 1
   RotationSpeed: 1
-  DistanceSurface: 77
+  DistanceSurface: 2110
   DistanceRotatingObject: 0
   Speed: 0
   DistanceSphereOfInfluence: 0
