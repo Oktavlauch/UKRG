@@ -5,38 +5,73 @@ using UnityEngine;
 public class Ellipsen : MonoBehaviour
 {
     LineRenderer lr;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
+    public GameObject protoplanet;
+    public Rigidbody2D rbplanet;
 
     public int segments;
+    public float a;
+    public float b;
+    public Vector2 PlanetDirection;
+    public float angle;
+    public float angleTangente;
+    public float resultingAngle;
+    public float SteigungPlanetDirection;
+    public float SteigungTangente;
+    public float FocusPointDistance;
+    public float StretchingFactor;
+    public float FocusPointY;
+    public Vector2 FocusPoint;
+    public Vector2 Center;
+    public float SteigungCenterLine;
+    public float rotatedAngle;
+    public Vector2 e;
+   // float at = 5000f;
+    //float bt = 5000f;
    
-    private void Awake()
+    void Awake()
     {
+        rbplanet = protoplanet.GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
+        //CalculateEllipse();
+    }
+
+    void LateUpdate()
+    {
+        a = Mathf.Abs(- 1 / ((Mathf.Pow(rb.velocity.x , 2) + Mathf.Pow(rb.velocity.y , 2)) / rbplanet.mass - 2 / Mathf.Sqrt(Mathf.Pow(PlanetDirection.x , 2) + Mathf.Pow(PlanetDirection.y , 2))));
+        PlanetDirection = new Vector2(rb.position.x - rbplanet.position.x, rb.position.y - rbplanet.position.y);
+        SteigungTangente = rb.velocity.y / rb.velocity.x;
+        SteigungPlanetDirection = PlanetDirection.y / PlanetDirection.x;
+        angleTangente = Mathf.Atan(SteigungTangente);
+        angle = Mathf.PI/2 - Mathf.Atan(SteigungPlanetDirection) - Mathf.Atan(SteigungTangente);
+        resultingAngle = angleTangente + angle;
+        FocusPointDistance = 2 * a - Mathf.Sqrt(Mathf.Pow(PlanetDirection.x, 2) + Mathf.Pow(PlanetDirection.y, 2));
+        FocusPointY = Mathf.Atan(resultingAngle);
+        StretchingFactor = Mathf.Sqrt(Mathf.Pow(FocusPointDistance, 2)) / (1 + Mathf.Pow(FocusPointY , 2));
+        FocusPoint = new Vector2(rb.position.x + StretchingFactor, rb.position.y + FocusPointY * StretchingFactor);
+        Center = new Vector2(FocusPoint.x + (rbplanet.position.x - FocusPoint.x) / 2 , FocusPoint.y + (rbplanet.position.y - FocusPoint.y) / 2 );
+        SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
+        rotatedAngle = Mathf.Atan(SteigungCenterLine);
+        e = new Vector2(Center.x - FocusPoint.x, Center.y - FocusPoint.y);
+        b = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(a, 2) - (Mathf.Pow(e.x, 2) + Mathf.Pow(e.y, 2))));
         CalculateEllipse();
     }
-    public float aSquared;
-    public float bSquared;
-   
+
     void CalculateEllipse()
     {
-       
     Vector3[] points = new Vector3[segments + 1];
-
-        //public float aSquared = -(rb.position.y * Mathf.Sqrt(rb.position.x)) / rb.velocity.y - (rb.position.y * rb.position.x * rb.velocity.x) / rb.velocity.y + (rb.position.x * rb.position.y) / rb.velocity.y + rb.position.x;
-        //public float bSquared = -(rb.position.x * Mathf.Sqrt(rb.position.y)) / rb.velocity.x - (rb.position.x * rb.position.y * rb.velocity.y) / rb.velocity.x + (rb.position.y * rb.position.x) / rb.velocity.x + rb.position.y;
-
 
         for (int i = 0; i < segments; i++)
         {
-            
-    
-   
-            //
-            float angle = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
-            float x = Mathf.Cos(angle) * Mathf.Sqrt(bSquared); //*radius        
-            float y = Mathf.Sin(angle) * Mathf.Sqrt(aSquared); //*radius
-            points[i] = new Vector3(x, y, 0f);
+            float angleEllipse = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
+            float x = Mathf.Cos(angleEllipse) * Mathf.Sqrt(b);        
+            float y = Mathf.Sin(angleEllipse) * Mathf.Sqrt(a);
+            float xrotated = x * Mathf.Cos(rotatedAngle) - y * Mathf.Sin(rotatedAngle);
+            float yrotated = x * Mathf.Sin(rotatedAngle) + y * Mathf.Cos(rotatedAngle);
+            float xtranslated = xrotated + Center.x ;
+            float ytranslated = yrotated + Center.y ;
+            points[i] = new Vector3(xtranslated, ytranslated, 0f);
         }
         points[segments] = points[0];
 
