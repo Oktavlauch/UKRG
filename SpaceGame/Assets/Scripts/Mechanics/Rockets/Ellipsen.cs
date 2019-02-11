@@ -16,8 +16,6 @@ public class Ellipsen : MonoBehaviour
     public float angle;
     public float angleTangente;
     public float resultingAngle;
-    public float SteigungPlanetDirection;
-    public float SteigungTangente;
     public float FocusPointDistance;
     public float StretchingFactor;
     public float FocusPointY;
@@ -39,13 +37,18 @@ public class Ellipsen : MonoBehaviour
 
     void LateUpdate()
     {
-        a = Mathf.Abs(- 1 / ((Mathf.Pow(rb.velocity.x , 2) + Mathf.Pow(rb.velocity.y , 2)) / rbplanet.mass - 2 / Mathf.Sqrt(Mathf.Pow(PlanetDirection.x , 2) + Mathf.Pow(PlanetDirection.y , 2))));
-        PlanetDirection = new Vector2(rb.position.x - rbplanet.position.x, rb.position.y - rbplanet.position.y);
-        SteigungTangente = rb.velocity.y / rb.velocity.x;
-        SteigungPlanetDirection = PlanetDirection.y / PlanetDirection.x;
-        angleTangente = Mathf.Atan(SteigungTangente);
-        angle = Mathf.PI/2 - Mathf.Atan(SteigungPlanetDirection) - Mathf.Atan(SteigungTangente);
-        resultingAngle = angleTangente + angle;
+        a = Mathf.Abs(- 1 / ((Mathf.Pow(rb.velocity.x , 2) + Mathf.Pow(rb.velocity.y , 2)) / rbplanet.mass - 2 / Mathf.Sqrt(Mathf.Pow(PlanetDirection.x , 2) + Mathf.Pow(PlanetDirection.y , 2))));//funktioniert
+        PlanetDirection = new Vector2(rb.position.x - rbplanet.position.x, rb.position.y - rbplanet.position.y);//funktioniert
+        angleTangente = Mathf.Atan(rb.velocity.y / rb.velocity.x);//funktioniert
+        angle = Mathf.PI/2 - Mathf.Atan(PlanetDirection.y / PlanetDirection.x) - (Mathf.PI / 2 - Mathf.Atan(rb.velocity.y / rb.velocity.x));//funktioniert
+        if (angleTangente <= 0)
+        {
+            resultingAngle = angleTangente + angle;
+        }
+        else
+        {
+            resultingAngle = angle - angleTangente;
+        }
         FocusPointDistance = 2 * a - Mathf.Sqrt(Mathf.Pow(PlanetDirection.x, 2) + Mathf.Pow(PlanetDirection.y, 2));
         FocusPointY = Mathf.Atan(resultingAngle);
         StretchingFactor = Mathf.Sqrt(Mathf.Pow(FocusPointDistance, 2)) / (1 + Mathf.Pow(FocusPointY , 2));
