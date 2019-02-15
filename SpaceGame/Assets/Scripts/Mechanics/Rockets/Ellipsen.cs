@@ -15,6 +15,7 @@ public class Ellipsen : MonoBehaviour
     public Vector2 PlanetDirection;
     public float angle;
     public float angleTangente;
+    public float midAngle;
     public float resultingAngle;
     public float FocusPointDistance;
     public float StretchingFactor;
@@ -43,17 +44,26 @@ public class Ellipsen : MonoBehaviour
         angle = Mathf.PI/2 - Mathf.Atan(PlanetDirection.y / PlanetDirection.x) - (Mathf.PI / 2 - Mathf.Atan(rb.velocity.y / rb.velocity.x));//funktioniert
         if (angleTangente <= 0)
         {
-            resultingAngle = angleTangente + angle;
+            midAngle = angleTangente + angle;
+            resultingAngle = angleTangente + midAngle;
         }
         else
         {
-            resultingAngle = angle - angleTangente;
+            midAngle = angle - angleTangente;
+            resultingAngle = angleTangente - midAngle;
         }
         FocusPointDistance = 2 * a - Mathf.Sqrt(Mathf.Pow(PlanetDirection.x, 2) + Mathf.Pow(PlanetDirection.y, 2));
         FocusPointY = Mathf.Atan(resultingAngle);
-        StretchingFactor = Mathf.Sqrt(Mathf.Pow(FocusPointDistance, 2)) / (1 + Mathf.Pow(FocusPointY , 2));
-        FocusPoint = new Vector2(rb.position.x + StretchingFactor, rb.position.y + FocusPointY * StretchingFactor);
-        Center = new Vector2(FocusPoint.x + (rbplanet.position.x - FocusPoint.x) / 2 , FocusPoint.y + (rbplanet.position.y - FocusPoint.y) / 2 );
+        StretchingFactor = FocusPointDistance / Mathf.Sqrt(1 + Mathf.Pow(FocusPointY, 2));
+        if (resultingAngle >= 0)
+        {
+            FocusPoint = new Vector2(rb.position.x - StretchingFactor, rb.position.y - FocusPointY * StretchingFactor);
+        }
+        else
+        {
+            FocusPoint = new Vector2(rb.position.x + StretchingFactor, rb.position.y - FocusPointY * StretchingFactor);
+        }
+            Center = new Vector2(FocusPoint.x + (rbplanet.position.x - FocusPoint.x) / 2 , FocusPoint.y + (rbplanet.position.y - FocusPoint.y) / 2 );
         SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
         rotatedAngle = Mathf.Atan(SteigungCenterLine);
         e = new Vector2(Center.x - FocusPoint.x, Center.y - FocusPoint.y);
