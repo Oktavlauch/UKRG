@@ -38,7 +38,7 @@ public class Ellipsen : MonoBehaviour
 
     void LateUpdate()
     {
-        a = Mathf.Abs(- 1 / ((Mathf.Pow(rb.velocity.x , 2) + Mathf.Pow(rb.velocity.y , 2)) / rbplanet.mass - 2 / Mathf.Sqrt(Mathf.Pow(PlanetDirection.x , 2) + Mathf.Pow(PlanetDirection.y , 2))));//funktioniert
+        a = 1 / (2 / Mathf.Sqrt(Mathf.Pow(PlanetDirection.x, 2) + Mathf.Pow(PlanetDirection.y, 2))) - ((Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.y, 2)) / rbplanet.mass);
         PlanetDirection = new Vector2(rb.position.x - rbplanet.position.x, rb.position.y - rbplanet.position.y);//funktioniert
         angleTangente = Mathf.Atan(rb.velocity.y / rb.velocity.x);//funktioniert
         angle = Mathf.PI/2 - Mathf.Atan(PlanetDirection.y / PlanetDirection.x) - (Mathf.PI / 2 - Mathf.Atan(rb.velocity.y / rb.velocity.x));//funktioniert
