@@ -33,7 +33,9 @@ public class Ellipsen : MonoBehaviour
         rbplanet = protoplanet.GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
-        //CalculateEllipse();
+        lr.SetWidth(5f, 5f);
+        lr.sortingLayerName = "Foreground";
+        CalculateEllipse();
     }
 
     void LateUpdate()
@@ -84,11 +86,12 @@ public class Ellipsen : MonoBehaviour
             float yrotated = x * Mathf.Sin(rotatedAngle) + y * Mathf.Cos(rotatedAngle);
             float xtranslated = xrotated + Center.x ;
             float ytranslated = yrotated + Center.y ;
-            points[i] = new Vector3(xtranslated, ytranslated, 0f);
+            points[i] = new Vector3(xtranslated, ytranslated, 1f);
         }
         points[segments] = points[0];
 
         lr.positionCount = segments + 1;
+        //points[0] = rb.position; war zum testen wo die ellipse ist, und weshalb man nichts sehen konnte 
         lr.SetPositions(points);
     }
 
