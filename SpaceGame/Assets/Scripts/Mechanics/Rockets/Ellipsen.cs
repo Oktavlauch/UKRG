@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Ellipsen : MonoBehaviour
@@ -57,7 +58,7 @@ public class Ellipsen : MonoBehaviour
         FocusPointDistance = 2 * a - Mathf.Sqrt(Mathf.Pow(PlanetDirection.x, 2) + Mathf.Pow(PlanetDirection.y, 2));
         FocusPointY = Mathf.Atan(resultingAngle);
         StretchingFactor = FocusPointDistance / Mathf.Sqrt(1 + Mathf.Pow(FocusPointY, 2));
-        if (resultingAngle >= 0)
+        if (angleTangente <= 0 && rb.position.x <= rbplanet.position.x && Mathf.Abs((rbplanet.position.x - rb.position.x) * Mathf.Tan(angleTangente)) <= Mathf.Abs(rb.position.y - rbplanet.position.y))
         {
             FocusPoint = new Vector2(rb.position.x - StretchingFactor, rb.position.y - FocusPointY * StretchingFactor);
         }
