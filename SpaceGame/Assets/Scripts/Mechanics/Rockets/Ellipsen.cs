@@ -49,7 +49,7 @@ public class Ellipsen : MonoBehaviour
         SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
         rotatedAngle = Mathf.Atan(SteigungCenterLine);
         e = new Vector2(Center.x - FocusPoint.x, Center.y - FocusPoint.y);
-        b = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(a, 2) - (Mathf.Pow(e.x, 2) + Mathf.Pow(e.y, 2))));
+        b = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(a, 2) - e.sqrMagnitude));
         CalculateEllipse();
     }
 
@@ -60,26 +60,18 @@ public class Ellipsen : MonoBehaviour
         for (int i = 0; i < segments; i++)
         {
             float angleEllipse = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
-            float x = Mathf.Cos(angleEllipse) * Mathf.Sqrt(b);        
-            float y = Mathf.Sin(angleEllipse) * Mathf.Sqrt(a);
+            float x = Mathf.Sin(angleEllipse) * 2 * a;        
+            float y = Mathf.Cos(angleEllipse) * 2 * b;
             float xrotated = x * Mathf.Cos(rotatedAngle) - y * Mathf.Sin(rotatedAngle);
             float yrotated = x * Mathf.Sin(rotatedAngle) + y * Mathf.Cos(rotatedAngle);
             float xtranslated = xrotated + Center.x ;
             float ytranslated = yrotated + Center.y ;
-            points[i] = new Vector3(x, y, 1f);
+            points[i] = new Vector3(xrotated, yrotated, 1f);
         }
         points[segments] = points[0];
 
         lr.positionCount = segments + 1;
         //points[0] = rb.position; war zum testen wo die ellipse ist, und weshalb man nichts sehen konnte 
         lr.SetPositions(points);
-    }
-
-    private void OnValidate()
-    {
-        if (Application.isPlaying)
-        {
-            CalculateEllipse();
-        }
     }
 }
