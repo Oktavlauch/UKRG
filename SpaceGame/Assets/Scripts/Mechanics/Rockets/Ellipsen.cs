@@ -14,6 +14,7 @@ public class Ellipsen : MonoBehaviour
     public float a;
     public float b;
     public Vector2 PlanetDirection;
+    public Vector2 velocity;
     public float angle;
     public float FocusPointDistance;
     public Vector2 FocusPointDirection;
@@ -38,8 +39,9 @@ public class Ellipsen : MonoBehaviour
 
     void LateUpdate()
     {
-        a = Math.Abs( 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / rbplanet.mass)));
+        velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         PlanetDirection = new Vector2(rbplanet.position.x - rb.position.x, rbplanet.position.y - rb.position.y);//funktioniert
+        a = Math.Abs( 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / rbplanet.mass)));
         angle = Vector2.SignedAngle(PlanetDirection, rb.velocity) * Mathf.Deg2Rad;
         FocusPointDistance = 2 * a - PlanetDirection.magnitude;
         FocusPointDirection = new Vector2(PlanetDirection.x * Mathf.Cos(angle) - PlanetDirection.y * Mathf.Sin(angle), PlanetDirection.x * Mathf.Sin(angle) + PlanetDirection.y * Mathf.Cos(angle));
@@ -48,7 +50,7 @@ public class Ellipsen : MonoBehaviour
         Center = new Vector2(FocusPoint.x + (rbplanet.position.x - FocusPoint.x) / 2 , FocusPoint.y + (rbplanet.position.y - FocusPoint.y) / 2 );
         SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
         rotatedAngle = Mathf.Atan(SteigungCenterLine);
-        e = new Vector2(Center.x - FocusPoint.x, Center.y - FocusPoint.y);
+        e = new Vector2((rbplanet.position.x - FocusPoint.x)/2, (rbplanet.position.y - FocusPoint.y) / 2 );
         b = Mathf.Abs(Mathf.Sqrt(Mathf.Pow(a, 2) - e.sqrMagnitude));
         CalculateEllipse();
     }
@@ -66,7 +68,7 @@ public class Ellipsen : MonoBehaviour
             float yrotated = x * Mathf.Sin(rotatedAngle) + y * Mathf.Cos(rotatedAngle);
             float xtranslated = xrotated + Center.x ;
             float ytranslated = yrotated + Center.y ;
-            points[i] = new Vector3(xrotated, yrotated, 1f);
+            points[i] = new Vector3(xtranslated, ytranslated, 1f);
         }
         points[segments] = points[0];
 
