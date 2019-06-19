@@ -27,11 +27,15 @@ public class TestRocketGravity : _Rockets
         rb.mass = Mass;
     }
 
+    private void LateUpdate()
+    {
+        
+    }
     // Update is called once per frame
     /// <summary>
     /// Adds Force and changes it according to currentposition;
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
         //Moved to SuperClass;
         //ObjectPos = testPlanet.GetPosition();

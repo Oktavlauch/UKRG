@@ -119,6 +119,7 @@ abstract public class _Rockets : MonoBehaviour
         Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
         float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no "G")
         rb.AddForce(ForceDirection.normalized * ForceValue);
+       
     }
 
     public void ApplyDrag(Rigidbody2D rb, float density, Vector2 WindSpeedDirection)
