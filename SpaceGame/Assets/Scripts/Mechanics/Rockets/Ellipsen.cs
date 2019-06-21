@@ -20,7 +20,6 @@ public class Ellipsen : MonoBehaviour
     public float StretchingFactor;
     public Vector2 FocusPoint;
     public Vector2 Center;
-    public Vector2 CenterRelative;
     public float SteigungCenterLine;
     public float rotatedAngle;
     public Vector2 e;
@@ -33,39 +32,43 @@ public class Ellipsen : MonoBehaviour
         rbplanet = protoplanet.GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
-        lr.SetWidth(5f, 5f);
-        lr.sortingLayerName = "Foreground";
+        lr.SetWidth(1f, 1f);
+        lr.sortingLayerName = "Background";
         CalculateEllipse();
     }
 
     void LateUpdate()
     {
         PlanetDirection = new Vector2(rbplanet.position.x - rb.position.x, rbplanet.position.y - rb.position.y); //funktioniert
-        a =  1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / planetMass)); //Finally Correct, yay
+        a =  1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / planetMass)); //Finally Correct, yay :)
         angle = Vector2.SignedAngle(PlanetDirection, rb.velocity) * Mathf.Deg2Rad;
-        FocusPointDistance = 2 * a - PlanetDirection.magnitude;
-        FocusPointDirection = new Vector2(PlanetDirection.x * Mathf.Cos(angle) - PlanetDirection.y * Mathf.Sin(angle), PlanetDirection.x * Mathf.Sin(angle) + PlanetDirection.y * Mathf.Cos(angle));
-        StretchingFactor = FocusPointDistance / PlanetDirection.magnitude;
-        FocusPoint = new Vector2(rb.position.x + FocusPointDirection.x * StretchingFactor, rb.position.y + FocusPointDirection.y * StretchingFactor); // should work
-        Center = new Vector2(FocusPoint.x + (rbplanet.position.x - FocusPoint.x) / 2 , FocusPoint.y + (rbplanet.position.y - FocusPoint.y) / 2 );
-        SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
-        rotatedAngle = Mathf.Atan(SteigungCenterLine);
-        e = new Vector2((rbplanet.position.x - FocusPoint.x)/2, (rbplanet.position.y - FocusPoint.y) / 2 );
-        b = Mathf.Sqrt(Mathf.Pow(a, 2) - e.sqrMagnitude); 
 
-        CalculateEllipse();
+        if (angle >= 0.01 || angle <= -0.01) // avoids console error when angle too small
+        {
+            FocusPointDistance = 2 * a - PlanetDirection.magnitude;
+            FocusPointDirection = new Vector2(PlanetDirection.x * Mathf.Cos(Mathf.PI + 2 * angle) - PlanetDirection.y * Mathf.Sin(Mathf.PI + 2 * angle), PlanetDirection.x * Mathf.Sin(Mathf.PI + 2 * angle) + PlanetDirection.y * Mathf.Cos(Mathf.PI + 2 * angle));
+            StretchingFactor = FocusPointDistance / PlanetDirection.magnitude;
+            FocusPoint = new Vector2(rb.position.x + FocusPointDirection.x * StretchingFactor, rb.position.y + FocusPointDirection.y * StretchingFactor); // should work
+            Center = new Vector2(FocusPoint.x + (rbplanet.position.x - FocusPoint.x) / 2, FocusPoint.y + (rbplanet.position.y - FocusPoint.y) / 2);
+            SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
+            rotatedAngle = Mathf.Atan(SteigungCenterLine);
+            e = new Vector2((rbplanet.position.x - FocusPoint.x) / 2, (rbplanet.position.y - FocusPoint.y) / 2);
+            b = Mathf.Sqrt(Mathf.Pow(a, 2) - Mathf.Pow(e.magnitude , 2));
 
+            CalculateEllipse();
+        }
     }
 
     void CalculateEllipse()
     {
+    segments = 10000;
     Vector3[] points = new Vector3[segments + 1];
 
         for (int i = 0; i < segments; i++)
         {
             float angleEllipse = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
-            float x = Mathf.Sin(angleEllipse) * 2 * a;        
-            float y = Mathf.Cos(angleEllipse) * 2 * b;
+            float x = Mathf.Sin(angleEllipse) * a;        
+            float y = Mathf.Cos(angleEllipse) * b;
             float xrotated = x * Mathf.Cos(rotatedAngle) - y * Mathf.Sin(rotatedAngle);
             float yrotated = x * Mathf.Sin(rotatedAngle) + y * Mathf.Cos(rotatedAngle);
             float xtranslated = xrotated + Center.x ;
