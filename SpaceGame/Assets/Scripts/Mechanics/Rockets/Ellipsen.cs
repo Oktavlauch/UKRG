@@ -24,23 +24,27 @@ public class Ellipsen : MonoBehaviour
     public float rotatedAngle;
     public Vector2 e;
     float planetMass = 5972000;
-   // float at = 5000f;
+    // float at = 5000f;
     //float bt = 5000f;
-   
+
     void Awake()
     {
         rbplanet = protoplanet.GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
         lr.SetWidth(1f, 1f);
-        lr.sortingLayerName = "Background";
         CalculateEllipse();
     }
 
     void LateUpdate()
     {
+        CalculateEllipse();
+    }
+
+    void CalculateEllipse()
+    {
         PlanetDirection = new Vector2(rbplanet.position.x - rb.position.x, rbplanet.position.y - rb.position.y); //funktioniert
-        a =  1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / planetMass)); //Finally Correct, yay :)
+        a = 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / planetMass)); //Finally Correct, yay :)
         angle = Vector2.SignedAngle(PlanetDirection, rb.velocity) * Mathf.Deg2Rad;
 
         if (angle >= 0.01 || angle <= -0.01) // avoids console error when angle too small
@@ -53,26 +57,26 @@ public class Ellipsen : MonoBehaviour
             SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
             rotatedAngle = Mathf.Atan(SteigungCenterLine);
             e = new Vector2((rbplanet.position.x - FocusPoint.x) / 2, (rbplanet.position.y - FocusPoint.y) / 2);
-            b = Mathf.Sqrt(Mathf.Pow(a, 2) - Mathf.Pow(e.magnitude , 2));
+            b = Mathf.Sqrt(Mathf.Pow(a, 2) - Mathf.Pow(e.magnitude, 2));
 
-            CalculateEllipse();
+            DrawEllipse();
         }
     }
 
-    void CalculateEllipse()
+    void DrawEllipse()
     {
-    segments = 10000;
-    Vector3[] points = new Vector3[segments + 1];
+        segments = 10000;
+        Vector3[] points = new Vector3[segments + 1];
 
         for (int i = 0; i < segments; i++)
         {
             float angleEllipse = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
-            float x = Mathf.Sin(angleEllipse) * a;        
+            float x = Mathf.Sin(angleEllipse) * a;
             float y = Mathf.Cos(angleEllipse) * b;
             float xrotated = x * Mathf.Cos(rotatedAngle) - y * Mathf.Sin(rotatedAngle);
             float yrotated = x * Mathf.Sin(rotatedAngle) + y * Mathf.Cos(rotatedAngle);
-            float xtranslated = xrotated + Center.x ;
-            float ytranslated = yrotated + Center.y ;
+            float xtranslated = xrotated + Center.x;
+            float ytranslated = yrotated + Center.y;
             points[i] = new Vector3(xtranslated, ytranslated, 1f);
         }
         points[segments] = points[0];
@@ -80,4 +84,11 @@ public class Ellipsen : MonoBehaviour
         lr.positionCount = segments + 1;
         lr.SetPositions(points);
     }
+
+    //Calculates Angle which the orbit is rotated
+    public float GetAngle()
+    {
+        return 10;
+    }
 }
+

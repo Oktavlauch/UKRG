@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
-
-   
 {
+    private int RotationSpeed;
     //creating desired traget to follow
     public Transform target;
 
     //Adding Vector3 to offset camera position in z axis
     private Vector3 offset;
-
-    
 
 
     //Start is called at the Start
@@ -26,13 +23,35 @@ public class CameraMovement : MonoBehaviour
 
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
         offset = transform.position - target.transform.position;
+
+
+        //Following Lines are for Rotation (not yet working)
+       // Ellipsen ellipsen;
+
+       // ellipsen = GameObject.FindWithTag("Player").GetComponent<Ellipsen>();
+
+        
     }
 
     //Update is called once per frame
     void Update()
     {
+        Zoom();
+        
+        // RotateCamera();
+
+    }
+
+    // Update is called once per frame after Update was called
+    void LateUpdate()
+    {
+        transform.position = target.position + offset;
+    }
+
+    public void Zoom()
+    {
         //Enables to zoom with the mousewheel
-       if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize >= 10)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize >= 10)
         {
             Camera.main.orthographicSize = Camera.main.orthographicSize - 5;
         }
@@ -45,7 +64,7 @@ public class CameraMovement : MonoBehaviour
         //enables finer tuning
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && Camera.main.orthographicSize <= 10)
         {
-            Camera.main.orthographicSize = Camera.main.orthographicSize -1;
+            Camera.main.orthographicSize = Camera.main.orthographicSize - 1;
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0 && Camera.main.orthographicSize >= 10)
@@ -71,9 +90,14 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame after Update was called
-    void LateUpdate()
+
+  /* public void RotateCamera()
     {
-        transform.position = target.position + offset;
-    }
+        RotationSpeed = 10;
+        if (transform.rotation.eulerAngles.z < 10)
+        {
+            transform.Rotate(Vector3.forward, RotationSpeed * Time.deltaTime);
+            Debug.Log(ellipsen.GetAngle());
+        }
+    }*/
 }
