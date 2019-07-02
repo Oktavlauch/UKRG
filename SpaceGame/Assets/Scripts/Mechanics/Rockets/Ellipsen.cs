@@ -32,7 +32,8 @@ public class Ellipsen : MonoBehaviour
         rbplanet = protoplanet.GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         lr = GetComponent<LineRenderer>();
-        lr.SetWidth(1f, 1f);
+        lr.startWidth = 1f ;
+        lr.endWidth = 1f;
         CalculateEllipse();
     }
 
