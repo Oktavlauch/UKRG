@@ -11,19 +11,19 @@ public class Ellipsen : MonoBehaviour
     public Rigidbody2D rbplanet;
 
     public int segments;
-    public float a;
-    public float b;
+    public double a;
+    public double b;
     public Vector2 PlanetDirection;
     public float angle;
-    public float FocusPointDistance;
+    public double FocusPointDistance;
     public Vector2 FocusPointDirection;
-    public float StretchingFactor;
+    public double StretchingFactor;
     public Vector2 FocusPoint;
     public Vector2 Center;
     public float SteigungCenterLine;
     public float rotatedAngle;
     public Vector2 e;
-    float planetMass = 5972000;
+    float planetMass;
     // float at = 5000f;
     //float bt = 5000f;
 
@@ -35,6 +35,7 @@ public class Ellipsen : MonoBehaviour
         lr.startWidth = 1f ;
         lr.endWidth = 1f;
         CalculateEllipse();
+        planetMass = 5700000; //rbplanet.mass;
     }
 
     void LateUpdate()
@@ -53,16 +54,17 @@ public class Ellipsen : MonoBehaviour
             FocusPointDistance = 2 * a - PlanetDirection.magnitude;
             FocusPointDirection = new Vector2(PlanetDirection.x * Mathf.Cos(Mathf.PI + 2 * angle) - PlanetDirection.y * Mathf.Sin(Mathf.PI + 2 * angle), PlanetDirection.x * Mathf.Sin(Mathf.PI + 2 * angle) + PlanetDirection.y * Mathf.Cos(Mathf.PI + 2 * angle));
             StretchingFactor = FocusPointDistance / PlanetDirection.magnitude;
-            FocusPoint = new Vector2(rb.position.x + FocusPointDirection.x * StretchingFactor, rb.position.y + FocusPointDirection.y * StretchingFactor); // should work
+            FocusPoint = new Vector2(rb.position.x + (float) FocusPointDirection.x * (float) StretchingFactor, rb.position.y + (float) FocusPointDirection.y * (float) StretchingFactor); // should work
             Center = new Vector2(FocusPoint.x + (rbplanet.position.x - FocusPoint.x) / 2, FocusPoint.y + (rbplanet.position.y - FocusPoint.y) / 2);
             SteigungCenterLine = (rbplanet.position.y - FocusPoint.y) / (rbplanet.position.x - FocusPoint.x);
             rotatedAngle = Mathf.Atan(SteigungCenterLine);
             e = new Vector2((rbplanet.position.x - FocusPoint.x) / 2, (rbplanet.position.y - FocusPoint.y) / 2);
-            b = Mathf.Sqrt(Mathf.Pow(a, 2) - Mathf.Pow(e.magnitude, 2));
+            b = Mathf.Sqrt(Mathf.Pow((float) a, 2) - Mathf.Pow(e.magnitude, 2));
 
             DrawEllipse();
         }
     }
+
 
     void DrawEllipse()
     {
@@ -72,8 +74,8 @@ public class Ellipsen : MonoBehaviour
         for (int i = 0; i < segments; i++)
         {
             float angleEllipse = ((float)i / (float)segments) * 360 * Mathf.Deg2Rad;
-            float x = Mathf.Sin(angleEllipse) * a;
-            float y = Mathf.Cos(angleEllipse) * b;
+            float x = Mathf.Sin(angleEllipse) * (float) a;
+            float y = Mathf.Cos(angleEllipse) * (float) b;
             float xrotated = x * Mathf.Cos(rotatedAngle) - y * Mathf.Sin(rotatedAngle);
             float yrotated = x * Mathf.Sin(rotatedAngle) + y * Mathf.Cos(rotatedAngle);
             float xtranslated = xrotated + Center.x;
