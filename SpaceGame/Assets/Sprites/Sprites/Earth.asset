@@ -44,7 +44,7 @@ MonoBehaviour:
   - m_CornerType: 7
     m_Sprites:
     - {fileID: 0}
-  m_FillPixelPerUnit: 100
+  m_FillPixelPerUnit: 1
   m_BevelSize: 0
   m_BevelCutoff: 0
   m_FillOffset: -0.07
