@@ -35,7 +35,7 @@ public class Ellipsen : MonoBehaviour
         lr.startWidth = 1f ;
         lr.endWidth = 1f;
         CalculateEllipse();
-        planetMass = 100000; //rbplanet.mass;
+        planetMass = 5700000; //rbplanet.mass;
     }
 
     void LateUpdate()
