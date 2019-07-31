@@ -19,6 +19,13 @@ public class TestRocketGravity : _Rockets
     private Rigidbody2D rb;
     //private bool KeyPressed;
 
+
+    void Awake()
+    {
+        lr = GetComponent<LineRenderer>();
+        lr.startWidth = 1f;
+        lr.endWidth = 1f;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +36,7 @@ public class TestRocketGravity : _Rockets
 
     private void LateUpdate()
     {
-        
+        CalculateEllipse(rb, testPlanet); 
     }
     // Update is called once per frame
     /// <summary>

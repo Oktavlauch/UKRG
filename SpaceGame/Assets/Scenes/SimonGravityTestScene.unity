@@ -539,7 +539,6 @@ GameObject:
   - component: {fileID: 731240324}
   - component: {fileID: 731240323}
   - component: {fileID: 731240326}
-  - component: {fileID: 731240329}
   - component: {fileID: 731240330}
   - component: {fileID: 731240327}
   m_Layer: 0
@@ -575,6 +574,21 @@ MonoBehaviour:
   Drag: 0
   DragCoefficient: 1
   CrossSectionArea: 1
+  lr: {fileID: 0}
+  segments: 0
+  a: 0
+  b: 0
+  PlanetDirection: {x: 0, y: 0}
+  angle: 0
+  FocusPointDistance: 0
+  FocusPointDirection: {x: 0, y: 0}
+  StretchingFactor: 0
+  FocusPoint: {x: 0, y: 0}
+  Center: {x: 0, y: 0}
+  SteigungCenterLine: 0
+  rotatedAngle: 0
+  e: {x: 0, y: 0}
+  PlanetPosition: {x: 0, y: 0}
   testPlanet: {fileID: 1946502603}
 --- !u!212 &731240324
 SpriteRenderer:
@@ -707,34 +721,6 @@ PolygonCollider2D:
       - {x: 0.14161286, y: -2.5617602}
       - {x: 0.281436, y: -2.3744586}
       - {x: 0.74634755, y: -2.5996175}
---- !u!114 &731240329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731240322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585da43e7fa0bee48b77cdd07efdd33d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 731240326}
-  protoplanet: {fileID: 1946502601}
-  rbplanet: {fileID: 1946502606}
-  segments: 50
-  a: 0
-  b: 0
-  PlanetDirection: {x: 0, y: 0}
-  angle: 0
-  FocusPointDistance: 0
-  FocusPointDirection: {x: 0, y: 0}
-  StretchingFactor: 0
-  FocusPoint: {x: 0, y: 0}
-  Center: {x: 0, y: 0}
-  SteigungCenterLine: 0
-  rotatedAngle: 0
-  e: {x: 0, y: 0}
 --- !u!120 &731240330
 LineRenderer:
   m_ObjectHideFlags: 0
