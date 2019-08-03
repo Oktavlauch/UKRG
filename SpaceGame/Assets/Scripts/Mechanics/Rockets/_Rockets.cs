@@ -8,7 +8,7 @@ abstract public class _Rockets : MonoBehaviour
     /// <summary>
     /// Mass of the Rocket(stage) in kg
     /// </summary>
-    public int Mass;
+    public float Mass;
 
     /// <summary>
     /// The current Speed of the rocket in x,y coordinates
@@ -69,6 +69,12 @@ abstract public class _Rockets : MonoBehaviour
     /// The Torque defines how fast the rocket can turn
     /// </summary>
     public float Torque;
+
+    /// <summary>
+    /// The mass of the fuel of the rocket
+    /// [F] = kg
+    /// </summary>
+    public float fuel;
     //----------------------------------------------------------
     // Forcefields etc.
     //----------------------------------------------------------
@@ -101,12 +107,23 @@ abstract public class _Rockets : MonoBehaviour
     /// </summary>
     /// <param name="rb">The Rigidbody to which the force will be applied (e.g. Rockets)</param>
     /// <param name="ObjectPos">The Planet with which the "Rigidbody" will interact.</param>
-    public void ApplyForce(Rigidbody2D rb, _Planet planet)
+    public void ApplyGravity(Rigidbody2D rb, _Planet planet)
     {
-    Vector2 planetPosition = planet.GetPosition();
-        if (Input.GetKey(KeyCode.W))
+        Vector2 planetPosition = planet.GetPosition();
+        Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
+        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no "G")
+        rb.AddForce(ForceDirection.normalized * ForceValue);
+     
+    }
+
+    public void Controlling(Rigidbody2D rb)
+    {      
+        while (fuel > 0)
         {
-            rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
+            if (Input.GetKey(KeyCode.W))
+            {
+                rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
+            }
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -116,10 +133,6 @@ abstract public class _Rockets : MonoBehaviour
         {
             rb.AddTorque(-Torque);
         }
-        Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
-        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no "G")
-        rb.AddForce(ForceDirection.normalized * ForceValue);
-       
     }
 
     public void ApplyDrag(Rigidbody2D rb, float density, Vector2 WindSpeedDirection)
@@ -171,7 +184,7 @@ abstract public class _Rockets : MonoBehaviour
             rotatedAngle = Mathf.Atan(SteigungCenterLine);
             e = new Vector2((PlanetPosition.x - FocusPoint.x) / 2, (PlanetPosition.y - FocusPoint.y) / 2);
             b = Mathf.Sqrt(Mathf.Pow((float)a, 2) - Mathf.Pow(e.magnitude, 2));
-
+     
             DrawEllipse();
         }
     }

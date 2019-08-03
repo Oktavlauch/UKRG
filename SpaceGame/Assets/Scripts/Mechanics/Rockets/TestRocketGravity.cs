@@ -32,6 +32,7 @@ public class TestRocketGravity : _Rockets
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = StartingVelocity;
         rb.mass = Mass;
+       
     }
 
     private void LateUpdate()
@@ -63,7 +64,8 @@ public class TestRocketGravity : _Rockets
         //ForceValue = (float) ((testPlanet.GetMass()* Mass)/ Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
         //rb.AddForce(ForceDirection.normalized * ForceValue);
 
-        ApplyForce(rb, testPlanet);
+        ApplyGravity(rb, testPlanet);
+        Controlling(rb);
         //ApplyDrag(rb, testPlanet.GetDensity(rb.position), testPlanet.AirSpeedDirection(rb.position));
         //rb.velocity = (testPlanet.AirSpeedDirection(rb.position));
 
