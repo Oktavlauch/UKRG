@@ -96,44 +96,30 @@ abstract public class _Rockets : MonoBehaviour
     /// </summary>
     public float CrossSectionArea = 1;
 
-    //mass of fuel, rocket has
-    public float fuel;
-
-    //efficiency of the engine
-    public float isp;
-
     /// <summary>
     /// Applies gravitational Force to an object.
     /// </summary>
     /// <param name="rb">The Rigidbody to which the force will be applied (e.g. Rockets)</param>
     /// <param name="ObjectPos">The Planet with which the "Rigidbody" will interact.</param>
-    public void ApplyGravity(Rigidbody2D rb, _Planet planet)
+    public void ApplyForce(Rigidbody2D rb, _Planet planet)
     {
     Vector2 planetPosition = planet.GetPosition();
-    Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
-    float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no "G"
-    rb.AddForce(ForceDirection.normalized * ForceValue);
-       
-    }
-
-    public void Controlling(Rigidbody2D rb)
-    {
-        while (fuel > 0)
+        if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetKey(KeyCode.W))
-            {
-                rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
-                fuel = fuel - (Thrust / isp);
-            }
+            rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
         }
-            if (Input.GetKey(KeyCode.A))
-            {
-                rb.AddTorque(Torque);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                rb.AddTorque(-Torque);
-            }
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.AddTorque(Torque);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.AddTorque(-Torque);
+        }
+        Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
+        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no "G")
+        rb.AddForce(ForceDirection.normalized * ForceValue);
+       
     }
 
     public void ApplyDrag(Rigidbody2D rb, float density, Vector2 WindSpeedDirection)

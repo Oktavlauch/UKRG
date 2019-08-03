@@ -63,8 +63,7 @@ public class TestRocketGravity : _Rockets
         //ForceValue = (float) ((testPlanet.GetMass()* Mass)/ Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
         //rb.AddForce(ForceDirection.normalized * ForceValue);
 
-        ApplyGravity(rb, testPlanet);
-        Controlling(rb);
+        ApplyForce(rb, testPlanet);
         //ApplyDrag(rb, testPlanet.GetDensity(rb.position), testPlanet.AirSpeedDirection(rb.position));
         //rb.velocity = (testPlanet.AirSpeedDirection(rb.position));
 
