@@ -571,6 +571,8 @@ MonoBehaviour:
   MaxTemperature: 0
   Thrust: 250
   Torque: 25
+  Fuel: 40
+  Isp: 280
   Drag: 0
   DragCoefficient: 1
   CrossSectionArea: 1

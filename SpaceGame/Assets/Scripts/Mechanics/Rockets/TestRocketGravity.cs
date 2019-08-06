@@ -32,7 +32,6 @@ public class TestRocketGravity : _Rockets
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = StartingVelocity;
         rb.mass = Mass;
-       
     }
 
     private void LateUpdate()

@@ -63,7 +63,7 @@ abstract public class _Rockets : MonoBehaviour
     /// The thrusting Power of a rocket
     /// [F]=N
     /// </summary>
-    public int Thrust;
+    public float Thrust;
 
     /// <summary>
     /// The Torque defines how fast the rocket can turn
@@ -74,7 +74,14 @@ abstract public class _Rockets : MonoBehaviour
     /// The mass of the fuel of the rocket
     /// [F] = kg
     /// </summary>
-    public float fuel;
+    public float Fuel;
+
+    ///<summary>
+    /// The efficiency of the attached engine
+    /// [F] = s
+    /// </summary>
+    public float Isp;
+
     //----------------------------------------------------------
     // Forcefields etc.
     //----------------------------------------------------------
@@ -118,13 +125,19 @@ abstract public class _Rockets : MonoBehaviour
 
     public void Controlling(Rigidbody2D rb)
     {      
-        while (fuel > 0)
+        if (Fuel > 0)
         {
             if (Input.GetKey(KeyCode.W))
             {
                 rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
+                Fuel = Fuel -  Thrust / Isp * Time.deltaTime;
+                Mass = Mass - Thrust / Isp * Time.deltaTime;
             }
         }
+        else {
+            Fuel = 0;
+        }
+
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddTorque(Torque);
