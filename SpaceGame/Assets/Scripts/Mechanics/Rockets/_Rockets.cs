@@ -109,6 +109,8 @@ abstract public class _Rockets : MonoBehaviour
     /// </summary>
     public float CrossSectionArea = 1;
 
+    public ParticleSystem pr;
+
     /// <summary>
     /// Applies gravitational Force to an object.
     /// </summary>
@@ -122,7 +124,10 @@ abstract public class _Rockets : MonoBehaviour
         rb.AddForce(ForceDirection.normalized * ForceValue);
      
     }
-
+    /// <summary>
+    /// Enables Rocket to get controlled by Player Instance
+    /// </summary>
+    /// <param name="rb">The Rigidbody to which the force will be applied (e.g. Rockets)</param>
     public void Controlling(Rigidbody2D rb)
     {      
         if (Fuel > 0)
@@ -132,6 +137,11 @@ abstract public class _Rockets : MonoBehaviour
                 rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
                 Fuel = Fuel -  Thrust / Isp * Time.deltaTime;
                 Mass = Mass - Thrust / Isp * Time.deltaTime;
+                pr.Play();
+            }
+            else
+            {
+                pr.Stop();
             }
         }
         else {
@@ -162,7 +172,7 @@ abstract public class _Rockets : MonoBehaviour
 
     //ELLIPSEN
 
-
+    public Camera camera;
     public LineRenderer lr;
     public int segments;
     public double a;
@@ -181,25 +191,26 @@ abstract public class _Rockets : MonoBehaviour
 
     public void CalculateEllipse(Rigidbody2D rb, _Planet planet)
     {
-        PlanetPosition = planet.GetPosition();
-        PlanetDirection = new Vector2(PlanetPosition.x - rb.position.x, PlanetPosition.y - rb.position.y); //funktioniert
-        a = 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / planet.GetMass())); //Finally Correct, yay :)
-        angle = Vector2.SignedAngle(PlanetDirection, rb.velocity) * Mathf.Deg2Rad;
+            PlanetPosition = planet.GetPosition();
+            PlanetDirection = new Vector2(PlanetPosition.x - rb.position.x, PlanetPosition.y - rb.position.y);
+            a = 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / planet.GetMass()));
+            angle = Vector2.SignedAngle(PlanetDirection, rb.velocity) * Mathf.Deg2Rad;
+            
+            if (angle >= 0.001 || angle <= -0.001) // avoids console error when angle too small
+            {
+                FocusPointDistance = 2 * a - PlanetDirection.magnitude;
+                FocusPointDirection = new Vector2(PlanetDirection.x * Mathf.Cos(Mathf.PI + 2 * angle) - PlanetDirection.y * Mathf.Sin(Mathf.PI + 2 * angle), PlanetDirection.x * Mathf.Sin(Mathf.PI + 2 * angle) + PlanetDirection.y * Mathf.Cos(Mathf.PI + 2 * angle));
+                StretchingFactor = FocusPointDistance / PlanetDirection.magnitude;
+                FocusPoint = new Vector2(rb.position.x + (float)FocusPointDirection.x * (float)StretchingFactor, rb.position.y + (float)FocusPointDirection.y * (float)StretchingFactor);
+                Center = new Vector2(FocusPoint.x + (PlanetPosition.x - FocusPoint.x) / 2, FocusPoint.y + (PlanetPosition.y - FocusPoint.y) / 2);
+                SteigungCenterLine = (PlanetPosition.y - FocusPoint.y) / (PlanetPosition.x - FocusPoint.x);
+                rotatedAngle = Mathf.Atan(SteigungCenterLine);
+                e = new Vector2((PlanetPosition.x - FocusPoint.x) / 2, (PlanetPosition.y - FocusPoint.y) / 2);
+                b = Mathf.Sqrt(Mathf.Pow((float)a, 2) - Mathf.Pow(e.magnitude, 2));
 
-        if (angle >= 0.01 || angle <= -0.01) // avoids console error when angle too small
-        {
-            FocusPointDistance = 2 * a - PlanetDirection.magnitude;
-            FocusPointDirection = new Vector2(PlanetDirection.x * Mathf.Cos(Mathf.PI + 2 * angle) - PlanetDirection.y * Mathf.Sin(Mathf.PI + 2 * angle), PlanetDirection.x * Mathf.Sin(Mathf.PI + 2 * angle) + PlanetDirection.y * Mathf.Cos(Mathf.PI + 2 * angle));
-            StretchingFactor = FocusPointDistance / PlanetDirection.magnitude;
-            FocusPoint = new Vector2(rb.position.x + (float)FocusPointDirection.x * (float)StretchingFactor, rb.position.y + (float)FocusPointDirection.y * (float)StretchingFactor); // should work
-            Center = new Vector2(FocusPoint.x + (PlanetPosition.x - FocusPoint.x) / 2, FocusPoint.y + (PlanetPosition.y - FocusPoint.y) / 2);
-            SteigungCenterLine = (PlanetPosition.y - FocusPoint.y) / (PlanetPosition.x - FocusPoint.x);
-            rotatedAngle = Mathf.Atan(SteigungCenterLine);
-            e = new Vector2((PlanetPosition.x - FocusPoint.x) / 2, (PlanetPosition.y - FocusPoint.y) / 2);
-            b = Mathf.Sqrt(Mathf.Pow((float)a, 2) - Mathf.Pow(e.magnitude, 2));
-     
-            DrawEllipse();
-        }
+                DrawEllipse();
+            }
+        
     }
 
     void DrawEllipse()
@@ -220,8 +231,15 @@ abstract public class _Rockets : MonoBehaviour
         }
         points[segments] = points[0];
 
-        lr.positionCount = segments + 1;
-        lr.SetPositions(points);
+        if (camera.orthographicSize < 100)
+        {
+            lr.positionCount = 0;
+        }
+        else
+        {
+            lr.positionCount = segments + 1;
+            lr.SetPositions(points);
+        }
     }
 
 
