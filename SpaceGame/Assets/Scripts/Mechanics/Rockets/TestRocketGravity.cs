@@ -25,7 +25,8 @@ public class TestRocketGravity : _Rockets
         lr = GetComponent<LineRenderer>();
         lr.startWidth = 1f;
         lr.endWidth = 1f;
-        lr.sortingOrder = 100;
+        lr.sortingOrder = -1;
+       
     }
     // Start is called before the first frame update
     void Start()

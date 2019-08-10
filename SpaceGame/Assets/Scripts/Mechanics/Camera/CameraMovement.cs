@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
+    private float targetangle;
     private int RotationSpeed;
     //creating desired traget to follow
     public Transform target;
+
+    public _Rockets rocket;
 
     //Adding Vector3 to offset camera position in z axis
     private Vector3 offset;
@@ -38,7 +41,7 @@ public class CameraMovement : MonoBehaviour
     {
         Zoom();
         
-        // RotateCamera();
+        //RotateCamera();
 
     }
 
@@ -91,13 +94,18 @@ public class CameraMovement : MonoBehaviour
     }
 
 
-  /* public void RotateCamera()
+  /*public void RotateCamera()
     {
-        RotationSpeed = 10;
-        if (transform.rotation.eulerAngles.z < 10)
+        RotationSpeed = 50;
+        targetangle = Mathf.Atan(rocket.PlanetDirection.y / rocket.PlanetDirection.x) * Mathf.Rad2Deg;
+
+        if (transform.rotation.eulerAngles.z > (90 - targetangle))
+        {
+            transform.Rotate(Vector3.back, RotationSpeed * Time.deltaTime);
+        }
+        else
         {
             transform.Rotate(Vector3.forward, RotationSpeed * Time.deltaTime);
-            Debug.Log(ellipsen.GetAngle());
         }
     }*/
 }
