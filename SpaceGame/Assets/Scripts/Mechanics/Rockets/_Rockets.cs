@@ -172,7 +172,7 @@ abstract public class _Rockets : MonoBehaviour
 
     //ELLIPSEN
 
-    public Camera camera;
+    public new Camera camera;
     public LineRenderer lr;
     public int segments;
     public double a;
@@ -231,7 +231,7 @@ abstract public class _Rockets : MonoBehaviour
         }
         points[segments] = points[0];
 
-        if (camera.orthographicSize < 100)
+        if (camera.orthographicSize < 10)
         {
             lr.positionCount = 0;
         }

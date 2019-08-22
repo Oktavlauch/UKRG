@@ -25,7 +25,6 @@ public class TestRocketGravity : _Rockets
         lr = GetComponent<LineRenderer>();
         lr.startWidth = 1f;
         lr.endWidth = 1f;
-        lr.sortingOrder = -1;
        
     }
     // Start is called before the first frame update
@@ -38,7 +37,11 @@ public class TestRocketGravity : _Rockets
 
     private void LateUpdate()
     {
-        CalculateEllipse(rb, testPlanet); 
+        
+    }
+    private void Update()
+    {
+        CalculateEllipse(rb, testPlanet);
     }
     // Update is called once per frame
     /// <summary>
