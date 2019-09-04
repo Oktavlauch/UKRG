@@ -6,6 +6,11 @@ using UnityEngine;
 abstract public class _Rockets : MonoBehaviour
 {
     /// <summary>
+    /// [Constant!] is used to define gravity
+    /// </summary>
+    public int G = 100000;
+
+    /// <summary>
     /// Mass of the Rocket(stage) in kg
     /// </summary>
     public float Mass;
@@ -92,7 +97,7 @@ abstract public class _Rockets : MonoBehaviour
     
 
     /// <summary>
-    /// Airresistance in Netons
+    /// Airresistance in Newtons
     /// F=c_w * A * 1/2 ρ * v^2
     /// </summary>
     public int Drag = 0;
@@ -120,7 +125,7 @@ abstract public class _Rockets : MonoBehaviour
     {
         Vector2 planetPosition = planet.GetPosition();
         Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
-        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no "G")
+        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no G = 100000)
         rb.AddForce(ForceDirection.normalized * ForceValue);
      
     }
@@ -129,32 +134,38 @@ abstract public class _Rockets : MonoBehaviour
     /// </summary>
     /// <param name="rb">The Rigidbody to which the force will be applied (e.g. Rockets)</param>
     public void Controlling(Rigidbody2D rb)
-    {      
-        if (Fuel > 0)
+    {
+        if (Time.timeScale == 1f)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Fuel > 0)
             {
-                rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
-                Fuel = Fuel -  Thrust / Isp * Time.deltaTime;
-                Mass = Mass - Thrust / Isp * Time.deltaTime;
-                pr.Play();
+                if (Input.GetKey(KeyCode.W))
+                {
+                    rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
+                    Fuel = Fuel - Thrust / Isp * Time.deltaTime;
+                    Mass = Mass - Thrust / Isp * Time.deltaTime;
+                    pr.Play();
+                }
+                else
+                {
+                    pr.Stop();
+                }
             }
             else
             {
+                Fuel = 0;
                 pr.Stop();
             }
-        }
-        else {
-            Fuel = 0;
-        }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddTorque(Torque);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddTorque(-Torque);
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.AddTorque(Torque);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                rb.AddTorque(-Torque);
+            }
         }
     }
 
@@ -193,7 +204,7 @@ abstract public class _Rockets : MonoBehaviour
     {
             PlanetPosition = planet.GetPosition();
             PlanetDirection = new Vector2(PlanetPosition.x - rb.position.x, PlanetPosition.y - rb.position.y);
-            a = 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude / planet.GetMass()));
+            a = 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude /planet.GetMass()));
             angle = Vector2.SignedAngle(PlanetDirection, rb.velocity) * Mathf.Deg2Rad;
             
             if (angle >= 0.001 || angle <= -0.001) // avoids console error when angle too small

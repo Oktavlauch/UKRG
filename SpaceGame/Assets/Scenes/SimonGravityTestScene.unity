@@ -5258,6 +5258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9b3bca89b363141a3835fa475fc9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  G: 100000
   Mass: 50
   Velocity: {x: 0, y: 0}
   StartingVelocity: {x: 0, y: 0}
