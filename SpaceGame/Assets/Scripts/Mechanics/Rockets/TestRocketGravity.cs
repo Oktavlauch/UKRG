@@ -32,7 +32,6 @@ public class TestRocketGravity : _Rockets
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = StartingVelocity;
-        rb.mass = Mass;
     }
 
     private void LateUpdate()
@@ -42,6 +41,7 @@ public class TestRocketGravity : _Rockets
     private void Update()
     {
         CalculateEllipse(rb, testPlanet);
+        rb.mass = Mass;
     }
     // Update is called once per frame
     /// <summary>

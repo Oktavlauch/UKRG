@@ -125,7 +125,7 @@ abstract public class _Rockets : MonoBehaviour
     {
         Vector2 planetPosition = planet.GetPosition();
         Vector2 ForceDirection = new Vector2(planetPosition.x - transform.position.x, planetPosition.y - transform.position.y); //direction from which to go towards center of oscillation
-        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no G = 100000)
+        float ForceValue = (float)((planet.GetMass() * Mass) / Math.Pow(ForceDirection.magnitude, 2)); // how strong the force is (G Mm / r^2) simplified (currently no G)
         rb.AddForce(ForceDirection.normalized * ForceValue);
      
     }
@@ -204,7 +204,7 @@ abstract public class _Rockets : MonoBehaviour
     {
             PlanetPosition = planet.GetPosition();
             PlanetDirection = new Vector2(PlanetPosition.x - rb.position.x, PlanetPosition.y - rb.position.y);
-            a = 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude /planet.GetMass()));
+            a = 1 / ((2 / PlanetDirection.magnitude) - (rb.velocity.sqrMagnitude /planet.GetMass()));   
             angle = Vector2.SignedAngle(PlanetDirection, rb.velocity) * Mathf.Deg2Rad;
             
             if (angle >= 0.001 || angle <= -0.001) // avoids console error when angle too small
