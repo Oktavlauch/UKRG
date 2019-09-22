@@ -4,32 +4,10 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private int RotationSpeed;
-    //creating desired traget to follow
-    public Transform target;
-
-    //Adding Vector3 to offset camera position in z axis
-    private Vector3 offset;
-
 
     //Start is called at the Start
     void Start()
     {   
-        //sets the camera position to target position at the Start
-        var pos = transform.position;
-        pos.x = target.position.x;
-        pos.y = target.position.y;
-        transform.position = pos;
-
-        //Calculate and store the offset value by getting the distance between the player's position and camera's position.
-        offset = transform.position - target.transform.position;
-
-
-        //Following Lines are for Rotation (not yet working)
-       // Ellipsen ellipsen;
-
-       // ellipsen = GameObject.FindWithTag("Player").GetComponent<Ellipsen>();
-
         
     }
 
@@ -38,15 +16,10 @@ public class CameraMovement : MonoBehaviour
     {
         Zoom();
         
-        // RotateCamera();
 
     }
 
-    // Update is called once per frame after Update was called
-    void LateUpdate()
-    {
-        transform.position = target.position + offset;
-    }
+
 
     public void Zoom()
     {
@@ -89,15 +62,4 @@ public class CameraMovement : MonoBehaviour
             Camera.main.orthographicSize = 1;
         }
     }
-
-
-  /* public void RotateCamera()
-    {
-        RotationSpeed = 10;
-        if (transform.rotation.eulerAngles.z < 10)
-        {
-            transform.Rotate(Vector3.forward, RotationSpeed * Time.deltaTime);
-            Debug.Log(ellipsen.GetAngle());
-        }
-    }*/
 }

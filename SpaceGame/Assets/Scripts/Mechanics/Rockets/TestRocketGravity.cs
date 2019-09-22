@@ -19,17 +19,29 @@ public class TestRocketGravity : _Rockets
     private Rigidbody2D rb;
     //private bool KeyPressed;
 
+
+    void Awake()
+    {
+        lr = GetComponent<LineRenderer>();
+        lr.startWidth = 1f;
+        lr.endWidth = 1f;
+       
+    }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = StartingVelocity;
-        rb.mass = Mass;
     }
 
     private void LateUpdate()
     {
         
+    }
+    private void Update()
+    {
+        CalculateEllipse(rb, testPlanet);
+        rb.mass = Mass;
     }
     // Update is called once per frame
     /// <summary>
@@ -37,26 +49,8 @@ public class TestRocketGravity : _Rockets
     /// </summary>
     void FixedUpdate()
     {
-        //Moved to SuperClass;
-        //ObjectPos = testPlanet.GetPosition();
-        ////KeyPressed = false;
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    rb.AddRelativeForce(new Vector2(0, 1) * Thrust);
-        //}
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    rb.AddTorque(Torque);
-        //}
-        //if (Input.GetKey(KeyCode.D))
-        //{
-        //    rb.AddTorque(-Torque);
-        //}
-        //ForceDirection = new Vector2(ObjectPos.x - transform.position.x, ObjectPos.y - transform.position.y); //direction from which to go towards center of oscillation
-        //ForceValue = (float) ((testPlanet.GetMass()* Mass)/ Math.Pow(ForceDirection.magnitude,2)); //The how strong the force is (G Mm / r^2) simplified
-        //rb.AddForce(ForceDirection.normalized * ForceValue);
-
-        ApplyForce(rb, testPlanet);
+        ApplyGravity(rb, testPlanet);
+        Controlling(rb);
         //ApplyDrag(rb, testPlanet.GetDensity(rb.position), testPlanet.AirSpeedDirection(rb.position));
         //rb.velocity = (testPlanet.AirSpeedDirection(rb.position));
 
